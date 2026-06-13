@@ -1,0 +1,11 @@
+{
+    "name": "Core",
+    "alias": "core",
+    "description": "Shared contracts and DTOs for cross-module communication.",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Core\\Providers\\CoreServiceProvider"
+    ],
+    "files": []
+}

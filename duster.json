@@ -1,0 +1,20 @@
+{
+    "include": [
+        "app",
+        "config",
+        "database",
+        "Modules",
+        "routes",
+        "tests"
+    ],
+    "exclude": [
+        "bootstrap/cache",
+        "storage",
+        "vendor"
+    ],
+    "scripts": {
+        "lint": {
+            "PHPStan": ["./vendor/bin/phpstan", "analyse", "--no-progress", "--memory-limit=512M"]
+        }
+    }
+}
