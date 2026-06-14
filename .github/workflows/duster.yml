@@ -19,8 +19,16 @@ jobs:
           php-version: '8.3'
           coverage: none
 
+      - name: Prepare application
+        run: |
+          cp .env.example .env
+          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
+
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction
+
+      - name: Generate app key
+        run: php artisan key:generate
 
       - name: Run Duster lint
         run: vendor/bin/duster lint
