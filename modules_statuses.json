@@ -1,3 +1,5 @@
 {
-    "Core": true
+    "Core": true,
+    "Catalog": true,
+    "Order": true
 }

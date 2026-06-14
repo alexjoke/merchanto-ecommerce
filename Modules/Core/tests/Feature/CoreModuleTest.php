@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Core\Tests\Feature;
 
 use Modules\Core\Providers\CoreServiceProvider;

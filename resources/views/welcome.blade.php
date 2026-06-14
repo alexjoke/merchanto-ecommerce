@@ -25,7 +25,9 @@
         <h1>{{ config('app.name') }}</h1>
         <p>Modular e-commerce platform — ready for development.</p>
         <div class="actions">
-            <a href="/admin" class="btn-primary">Admin panel</a>
+            <a href="/shop" class="btn-primary">Shop</a>
+            <a href="/orders/create" class="btn-secondary">Checkout</a>
+            <a href="/admin" class="btn-secondary">Admin panel</a>
             <a href="/api/health" class="btn-secondary">API health</a>
         </div>
         <p class="stack">Laravel · nwidart/laravel-modules · Livewire · Filament · PostgreSQL · Pest</p>
