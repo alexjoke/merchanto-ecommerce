@@ -1,14 +1,54 @@
 <div>
     <header>
-        <h1>Shop</h1>
+        <div>
+            <h1>Shop</h1>
+            <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">
+                {{ count($products) }} {{ str('product')->plural(count($products)) }} available
+            </p>
+        </div>
         <nav style="display: flex; gap: 1rem;">
             <a href="{{ route('order.create') }}">Checkout</a>
             <a href="{{ url('/') }}">← Home</a>
         </nav>
     </header>
 
+    @if ($categories !== [])
+        <section style="margin-bottom: 1.5rem;">
+            <p style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; margin-bottom: 0.75rem;">
+                Categories
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <button
+                    type="button"
+                    wire:click="clearCategoryFilter"
+                    style="padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: 1px solid {{ $categoryId === null ? '#d97706' : '#d1d5db' }}; background: {{ $categoryId === null ? '#d97706' : '#fff' }}; color: {{ $categoryId === null ? '#fff' : '#374151' }};"
+                >
+                    All
+                </button>
+                @foreach ($categories as $category)
+                    <button
+                        type="button"
+                        wire:click="$set('categoryId', {{ $category['id'] }})"
+                        style="padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; cursor: pointer; border: 1px solid {{ $categoryId === $category['id'] ? '#d97706' : '#d1d5db' }}; background: {{ $categoryId === $category['id'] ? '#d97706' : '#fff' }}; color: {{ $categoryId === $category['id'] ? '#fff' : '#374151' }};"
+                    >
+                        {{ $category['name'] }}
+                    </button>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
     @if ($products === [])
-        <p style="color: #6b7280;">No products available right now.</p>
+        <p style="color: #6b7280;">
+            @if ($categoryId !== null)
+                No products in this category right now.
+                <button type="button" wire:click="clearCategoryFilter" style="color: #d97706; background: none; border: none; cursor: pointer; font: inherit; text-decoration: underline;">
+                    View all products
+                </button>
+            @else
+                No products available right now.
+            @endif
+        </p>
     @else
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.5rem;">
             @foreach ($products as $product)
