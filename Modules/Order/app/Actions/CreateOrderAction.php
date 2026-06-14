@@ -4,8 +4,8 @@ namespace Modules\Order\Actions;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\Core\Contracts\InventoryServiceInterface;
 use Modules\Core\Contracts\ProductCatalogInterface;
+use Modules\Core\Contracts\ProductStockInterface;
 use Modules\Core\DTO\OrderItemDto;
 use Modules\Core\Exceptions\InsufficientStockException;
 use Modules\Core\Exceptions\ProductUnavailableException;
@@ -18,7 +18,7 @@ class CreateOrderAction
 {
     public function __construct(
         private ProductCatalogInterface $catalog,
-        private InventoryServiceInterface $inventory,
+        private ProductStockInterface $stock,
     ) {}
 
     /**
@@ -50,7 +50,7 @@ class CreateOrderAction
                     throw new ProductUnavailableException($line->productId);
                 }
 
-                if (! $this->inventory->isAvailable($line->productId, $line->quantity)) {
+                if (! $this->stock->hasStock($line->productId, $line->quantity)) {
                     throw new InsufficientStockException($product->name);
                 }
 
@@ -85,7 +85,7 @@ class CreateOrderAction
                     ...$item,
                 ]);
 
-                $this->inventory->decrementStock($item['product_id'], $item['quantity']);
+                $this->stock->deductStock($item['product_id'], $item['quantity']);
             }
 
             return $order->load('items');

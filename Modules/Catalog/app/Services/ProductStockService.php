@@ -3,14 +3,14 @@
 namespace Modules\Catalog\Services;
 
 use Modules\Catalog\Models\Product;
-use Modules\Core\Contracts\InventoryServiceInterface;
+use Modules\Core\Contracts\ProductStockInterface;
 use Modules\Core\Exceptions\InsufficientStockException;
 use Modules\Core\Exceptions\InvalidQuantityException;
 use Modules\Core\Exceptions\ProductUnavailableException;
 
-class InventoryService implements InventoryServiceInterface
+class ProductStockService implements ProductStockInterface
 {
-    public function isAvailable(int $productId, int $quantity): bool
+    public function hasStock(int $productId, int $quantity): bool
     {
         if ($quantity < 1) {
             return false;
@@ -25,7 +25,7 @@ class InventoryService implements InventoryServiceInterface
         return $product->stock >= $quantity;
     }
 
-    public function decrementStock(int $productId, int $quantity): void
+    public function deductStock(int $productId, int $quantity): void
     {
         if ($quantity < 1) {
             throw new InvalidQuantityException;

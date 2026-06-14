@@ -3,10 +3,10 @@
 namespace Modules\Catalog\Providers;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Modules\Catalog\Services\InventoryService;
 use Modules\Catalog\Services\ProductCatalogService;
-use Modules\Core\Contracts\InventoryServiceInterface;
+use Modules\Catalog\Services\ProductStockService;
 use Modules\Core\Contracts\ProductCatalogInterface;
+use Modules\Core\Contracts\ProductStockInterface;
 use Nwidart\Modules\Support\ModuleServiceProvider;
 
 class CatalogServiceProvider extends ModuleServiceProvider
@@ -43,7 +43,7 @@ class CatalogServiceProvider extends ModuleServiceProvider
         parent::register();
 
         $this->app->bind(ProductCatalogInterface::class, ProductCatalogService::class);
-        $this->app->bind(InventoryServiceInterface::class, InventoryService::class);
+        $this->app->bind(ProductStockInterface::class, ProductStockService::class);
     }
 
     /**
