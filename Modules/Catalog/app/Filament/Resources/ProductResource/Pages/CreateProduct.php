@@ -16,7 +16,7 @@ class CreateProduct extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['price_cents'] = self::priceToCents($this->form->getState()['price_dollars'] ?? 0);
+        $data['price_cents'] = self::priceToCents($this->form->getRawState()['price_dollars'] ?? 0);
 
         return $data;
     }

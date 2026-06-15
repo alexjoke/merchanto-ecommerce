@@ -29,7 +29,7 @@ class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        $data['price_cents'] = CreateProduct::priceToCents($this->form->getState()['price_dollars'] ?? 0);
+        $data['price_cents'] = CreateProduct::priceToCents($this->form->getRawState()['price_dollars'] ?? 0);
 
         return $data;
     }
