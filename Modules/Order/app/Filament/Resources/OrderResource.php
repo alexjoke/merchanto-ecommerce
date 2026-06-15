@@ -27,13 +27,14 @@ class OrderResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Orders';
 
-    protected static ?string $recordTitleAttribute = 'reference';
+    protected static ?string $recordTitleAttribute = 'order_hash';
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextInput::make('reference')
+                TextInput::make('order_hash')
+                    ->label('Order hash')
                     ->disabled(),
                 TextInput::make('customer_name')
                     ->disabled(),
@@ -60,7 +61,8 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('reference')
+                TextColumn::make('order_hash')
+                    ->label('Order hash')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('customer_name')

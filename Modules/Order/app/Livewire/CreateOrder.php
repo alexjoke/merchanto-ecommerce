@@ -85,7 +85,7 @@ class CreateOrder extends Component
             ]);
         }
 
-        $this->redirectRoute('order.view', ['reference' => $order->reference], navigate: true);
+        $this->redirectRoute('order.view', ['orderHash' => $order->order_hash], navigate: true);
     }
 
     public function render(): View

@@ -5,17 +5,17 @@ namespace Modules\Order\Livewire;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use Modules\Order\Actions\FindOrderByReferenceAction;
+use Modules\Order\Actions\FindOrderByHashAction;
 use Modules\Order\Models\Order;
 
 #[Layout('order::layouts.storefront')]
 class ViewOrder extends Component
 {
-    public string $reference;
+    public string $orderHash;
 
     /**
      * @var array{
-     *     reference: string,
+     *     orderHash: string,
      *     customerName: string,
      *     customerEmail: string,
      *     customerPhone: string|null,
@@ -36,7 +36,7 @@ class ViewOrder extends Component
 
     /**
      * @return array{
-     *     reference: string,
+     *     orderHash: string,
      *     customerName: string,
      *     customerEmail: string,
      *     customerPhone: string|null,
@@ -56,7 +56,7 @@ class ViewOrder extends Component
     public static function orderToArray(Order $order): array
     {
         return [
-            'reference' => $order->reference,
+            'orderHash' => $order->order_hash,
             'customerName' => $order->customer_name,
             'customerEmail' => $order->customer_email,
             'customerPhone' => $order->customer_phone,
@@ -74,11 +74,11 @@ class ViewOrder extends Component
         ];
     }
 
-    public function mount(string $reference, FindOrderByReferenceAction $finder): void
+    public function mount(string $orderHash, FindOrderByHashAction $finder): void
     {
-        $this->reference = $reference;
+        $this->orderHash = $orderHash;
 
-        $order = $finder->execute($reference);
+        $order = $finder->execute($orderHash);
 
         if ($order === null) {
             abort(404);

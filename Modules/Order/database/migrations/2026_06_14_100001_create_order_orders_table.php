@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('order_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('reference')->unique();
+            $table->string('order_hash')->unique();
             $table->string('customer_name');
             $table->string('customer_email');
             $table->string('customer_phone')->nullable();

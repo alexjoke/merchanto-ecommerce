@@ -4,13 +4,13 @@ namespace Modules\Order\Actions;
 
 use Modules\Order\Models\Order;
 
-class FindOrderByReferenceAction
+class FindOrderByHashAction
 {
-    public function execute(string $reference): ?Order
+    public function execute(string $orderHash): ?Order
     {
         return Order::query()
             ->with('items')
-            ->where('reference', $reference)
+            ->where('order_hash', $orderHash)
             ->first();
     }
 }

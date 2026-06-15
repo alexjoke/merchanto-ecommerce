@@ -11,7 +11,7 @@ use Modules\Order\Enums\OrderStatus;
 
 /**
  * @property int $id
- * @property string $reference
+ * @property string $order_hash
  * @property string $customer_name
  * @property string $customer_email
  * @property string|null $customer_phone
@@ -22,7 +22,7 @@ use Modules\Order\Enums\OrderStatus;
  * @property-read Collection<int, OrderItem> $items
  */
 #[Fillable([
-    'reference',
+    'order_hash',
     'customer_name',
     'customer_email',
     'customer_phone',

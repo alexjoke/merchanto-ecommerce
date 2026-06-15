@@ -18,7 +18,7 @@ class OrderDatabaseSeeder extends Seeder
 
         $orders = [
             [
-                'reference' => 'ORD-DEMO0001',
+                'order_hash' => 'ORD-DEMO0001',
                 'customer_name' => 'Jane Doe',
                 'customer_email' => 'jane@example.com',
                 'customer_phone' => '+1 555 0101',
@@ -29,7 +29,7 @@ class OrderDatabaseSeeder extends Seeder
                 ],
             ],
             [
-                'reference' => 'ORD-DEMO0002',
+                'order_hash' => 'ORD-DEMO0002',
                 'customer_name' => 'John Smith',
                 'customer_email' => 'john@example.com',
                 'customer_phone' => null,
@@ -41,7 +41,7 @@ class OrderDatabaseSeeder extends Seeder
                 ],
             ],
             [
-                'reference' => 'ORD-DEMO0003',
+                'order_hash' => 'ORD-DEMO0003',
                 'customer_name' => 'Alex Rivera',
                 'customer_email' => 'alex@example.com',
                 'customer_phone' => '+1 555 0199',
@@ -52,7 +52,7 @@ class OrderDatabaseSeeder extends Seeder
                 ],
             ],
             [
-                'reference' => 'ORD-DEMO0004',
+                'order_hash' => 'ORD-DEMO0004',
                 'customer_name' => 'Sam Taylor',
                 'customer_email' => 'sam@example.com',
                 'customer_phone' => null,
@@ -71,7 +71,7 @@ class OrderDatabaseSeeder extends Seeder
 
     /**
      * @param  array{
-     *     reference: string,
+     *     order_hash: string,
      *     customer_name: string,
      *     customer_email: string,
      *     customer_phone: string|null,
@@ -97,7 +97,7 @@ class OrderDatabaseSeeder extends Seeder
         }
 
         $order = Order::query()->updateOrCreate(
-            ['reference' => $orderData['reference']],
+            ['order_hash' => $orderData['order_hash']],
             [
                 'customer_name' => $orderData['customer_name'],
                 'customer_email' => $orderData['customer_email'],

@@ -1,6 +1,6 @@
 <div>
     <header>
-        <h1>Order {{ $order['reference'] }}</h1>
+        <h1>Order {{ $order['orderHash'] }}</h1>
         <nav>
             <a href="{{ route('catalog.shop') }}">Shop</a>
             <a href="{{ route('order.create') }}">New order</a>
@@ -64,7 +64,7 @@
         </section>
 
         <p style="font-size: 0.875rem; color: #6b7280;">
-            Save your reference <strong>{{ $order['reference'] }}</strong> to view this order again later.
+            Save your order hash <strong>{{ $order['orderHash'] }}</strong> to view this order again later.
         </p>
     @endif
 </div>

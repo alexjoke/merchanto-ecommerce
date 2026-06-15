@@ -70,7 +70,7 @@ class CreateOrderAction
             }
 
             $order = Order::query()->create([
-                'reference' => $this->generateReference(),
+                'order_hash' => $this->generateOrderHash(),
                 'customer_name' => $customerName,
                 'customer_email' => $customerEmail,
                 'customer_phone' => $customerPhone,
@@ -92,12 +92,12 @@ class CreateOrderAction
         });
     }
 
-    private function generateReference(): string
+    private function generateOrderHash(): string
     {
         do {
-            $reference = 'ORD-' . strtoupper(Str::random(8));
-        } while (Order::query()->where('reference', $reference)->exists());
+            $orderHash = 'ORD-' . strtoupper(Str::random(8));
+        } while (Order::query()->where('order_hash', $orderHash)->exists());
 
-        return $reference;
+        return $orderHash;
     }
 }
