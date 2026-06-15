@@ -1,4 +1,4 @@
-name: Code Style
+name: CI
 
 on:
   push:
@@ -35,3 +35,30 @@ jobs:
 
       - name: Run Larastan (level 5)
         run: vendor/bin/phpstan analyse --no-progress --memory-limit=512M
+
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, sqlite3
+          coverage: none
+
+      - name: Prepare application
+        run: |
+          cp .env.example .env
+          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Generate app key
+        run: php artisan key:generate
+
+      - name: Run tests
+        run: composer test
